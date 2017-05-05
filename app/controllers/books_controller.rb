@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
   
   def index
       @books = Book.all;
@@ -20,8 +21,22 @@ class BooksController < ApplicationController
       end
    end
   
+  def edit
+  end
+  
+  def update
+  end
+  
+  def destroy
+  end
+  
   private
   def book_params
     params.require("book").permit(:title, :introduction, :author, :price)
+  end
+  
+  def find_book
+    @book = Book.find_by(id: params[ :id])
+    redirect_to books_path, notice: "no data!" if @book.nil?
   end
 end
