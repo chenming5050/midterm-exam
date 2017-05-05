@@ -35,6 +35,8 @@ class BooksController < ApplicationController
   end
   
   def destroy
+    @book.destroy
+    redirect_to books_path, notice: "deleted!"
   end
   
   private
